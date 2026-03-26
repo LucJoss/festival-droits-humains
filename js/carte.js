@@ -192,7 +192,7 @@ document.addEventListener('DOMContentLoaded', () => {
   /* ── Populate sidebar city list ──────────────────────────── */
   const cityListEl = document.getElementById('map-city-list');
   if (cityListEl) {
-    Object.keys(cityFilms).sort().forEach(cityName => {
+    Object.keys(cityFilms).sort((a, b) => cityFilms[b].length - cityFilms[a].length).forEach(cityName => {
       const count   = cityFilms[cityName].length;
       const nameEl  = el('div', { cls: 'map-city-name', text: cityName });
       const countEl = el('div', { cls: 'map-city-count', text: count + ' séance' + (count > 1 ? 's' : '') });

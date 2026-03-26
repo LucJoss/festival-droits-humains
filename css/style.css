@@ -707,17 +707,47 @@ body::before {
   position: relative;
   overflow: hidden;
 }
-.about-frame-label {
-  font-size: 0.7rem;
-  letter-spacing: 0.2em;
-  text-transform: uppercase;
-  color: var(--gray-500);
-}
 .about-frame::before {
   content: '';
   position: absolute;
   inset: 0;
-  background: radial-gradient(ellipse at 50% 0%, rgba(255,255,0,0.06), transparent 70%);
+  background:
+    radial-gradient(ellipse at 50% 0%, rgba(255,255,0,0.06), transparent 60%),
+    linear-gradient(rgba(255,255,0,0.025) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255,255,0,0.025) 1px, transparent 1px);
+  background-size: 100% 100%, 32px 32px, 32px 32px;
+}
+.about-frame-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.25rem;
+  position: relative;
+  z-index: 1;
+}
+.about-frame-logo {
+  width: 56px;
+  height: 56px;
+  object-fit: contain;
+  opacity: 0.35;
+  filter: grayscale(0.3);
+}
+.about-frame-label {
+  font-size: 0.6rem;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  color: var(--gray-700);
+  border: 1px solid var(--border);
+  padding: 0.35rem 0.75rem;
+  border-radius: 100px;
+}
+.about-frame-sub {
+  font-family: var(--font-display);
+  font-size: 1.5rem;
+  color: var(--yellow);
+  opacity: 0.15;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
 }
 .about-badge-float {
   position: absolute;
@@ -819,8 +849,9 @@ body::before {
   border: 1px solid var(--border);
   overflow: hidden;
   position: relative;
+  background: #0A0908;
 }
-.cities-minimap .leaflet-container { border-radius: var(--radius); background: #080706; }
+.cities-minimap .leaflet-container { border-radius: var(--radius); background: #0A0908; }
 .cities-minimap-caption {
   position: absolute;
   bottom: 0.75rem;
@@ -1172,13 +1203,17 @@ body::before {
 
 /* Week filter pills */
 .week-filter-row {
+  position: sticky;
+  top: calc(var(--nav-h) + 64px);
+  z-index: 49;
   display: flex;
   gap: 0.35rem;
   flex-wrap: wrap;
   align-items: center;
-  padding: 0.65rem clamp(1.5rem, 5vw, 4rem);
+  padding: 0.55rem clamp(1.5rem, 5vw, 4rem);
   border-bottom: 1px solid var(--border);
-  background: rgba(14,12,12,0.6);
+  background: rgba(14,12,12,0.92);
+  backdrop-filter: blur(20px);
 }
 .week-filter-label {
   font-size: 0.6rem;
