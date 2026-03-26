@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Film — Au Cinéma Pour les Droits Humains</title>
+  <link rel="icon" href="faviconV2.png" type="image/png">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+  <!-- ── NAVIGATION ─────────────────────────────────────── -->
+  <nav class="nav">
+    <a href="index.html" class="nav-logo">
+      <svg viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+        <rect width="28" height="28" fill="#FFFF00"/>
+        <rect x="11" y="13" width="6" height="10" fill="#231F20"/>
+        <line x1="14" y1="13" x2="14" y2="10" stroke="#231F20" stroke-width="1.2"/>
+        <ellipse cx="14" cy="9" rx="1.5" ry="2" fill="#231F20"/>
+        <path d="M4 16 Q6 14 8 16 Q10 18 12 16" stroke="#231F20" stroke-width="1" fill="none"/>
+        <path d="M4 20 Q6 18 8 20 Q10 22 12 20" stroke="#231F20" stroke-width="1" fill="none"/>
+        <path d="M16 16 Q18 14 20 16 Q22 18 24 16" stroke="#231F20" stroke-width="1" fill="none"/>
+        <path d="M16 20 Q18 18 20 20 Q22 22 24 20" stroke="#231F20" stroke-width="1" fill="none"/>
+      </svg>
+      <div class="nav-logo-text">Au Cinéma <span>Droits Humains</span></div>
+    </a>
+    <div class="nav-links">
+      <a href="index.html"     class="nav-link">Accueil</a>
+      <a href="films.html"     class="nav-link">Films</a>
+      <a href="programme.html" class="nav-link">Programme</a>
+      <a href="carte.html"     class="nav-link">Carte</a>
+    </div>
+    <button class="nav-burger" aria-label="Menu"><span></span><span></span><span></span></button>
+  </nav>
+  <div class="nav-mobile">
+    <a href="index.html"     class="nav-link">Accueil</a>
+    <a href="films.html"     class="nav-link">Films</a>
+    <a href="programme.html" class="nav-link">Programme</a>
+    <a href="carte.html"     class="nav-link">Carte</a>
+  </div>
+
+  <!-- ── HERO ──────────────────────────────────────────── -->
+  <div id="detail-content">
+    <header class="detail-hero">
+      <!-- Poster -->
+      <div class="detail-poster" aria-hidden="true">
+        <div class="detail-poster-icon">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48" fill="none" stroke="white" stroke-width="1" stroke-linecap="round">
+            <rect x="4" y="4" width="40" height="40" rx="2"/>
+            <path d="M14 4v40M34 4v40M4 24h40M4 14h10M4 34h10M34 14h10M34 34h10"/>
+          </svg>
+        </div>
+      </div>
+
+      <!-- Info -->
+      <div class="detail-info">
+        <div class="detail-breadcrumb">
+          <a href="films.html">Films</a>
+          <span>›</span>
+          <span>Fiche film</span>
+        </div>
+        <h1 class="detail-title" id="detail-title"></h1>
+        <p class="detail-director" id="detail-director"></p>
+        <div class="detail-meta-row" id="detail-badges"></div>
+        <a href="films.html" class="btn btn-outline" style="margin-top:1.5rem">← Retour aux films</a>
+      </div>
+    </header>
+
+    <!-- ── BODY ─────────────────────────────────────────── -->
+    <div class="detail-body">
+      <div class="detail-grid">
+
+        <!-- Synopsis col -->
+        <div>
+          <p class="detail-synopsis-title">Synopsis</p>
+          <div class="detail-synopsis" id="detail-synopsis"></div>
+
+          <!-- Séances -->
+          <section class="screenings-section" aria-labelledby="screenings-heading">
+            <p class="detail-synopsis-title" id="screenings-heading" style="margin-bottom:1.25rem">Séances</p>
+            <div id="detail-screenings"></div>
+          </section>
+        </div>
+
+        <!-- Specs sidebar -->
+        <aside>
+          <div class="detail-specs" id="detail-specs"></div>
+        </aside>
+      </div>
+    </div>
+
+    <!-- ── FILMS SIMILAIRES ─────────────────────────────── -->
+    <section class="related-section" aria-labelledby="related-heading">
+      <div class="container">
+        <div class="section-header" style="margin-bottom:2rem">
+          <h2 class="section-title" id="related-heading" style="font-size:clamp(1.5rem,4vw,2.5rem)">Films similaires</h2>
+          <a href="films.html" class="btn btn-outline">Voir tous →</a>
+        </div>
+        <div class="films-grid" id="related-films" style="grid-template-columns: repeat(auto-fill, minmax(200px, 1fr))"></div>
+      </div>
+    </section>
+  </div>
+
+  <!-- ── FOOTER ──────────────────────────────────────────── -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <div class="nav-logo" style="margin-bottom:1rem">
+            <svg viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg" style="width:22px;height:22px" aria-hidden="true">
+              <rect width="28" height="28" fill="#FFFF00"/>
+              <rect x="11" y="13" width="6" height="10" fill="#231F20"/>
+              <line x1="14" y1="13" x2="14" y2="10" stroke="#231F20" stroke-width="1.2"/>
+              <ellipse cx="14" cy="9" rx="1.5" ry="2" fill="#231F20"/>
+              <path d="M4 16 Q6 14 8 16 Q10 18 12 16" stroke="#231F20" stroke-width="1" fill="none"/>
+              <path d="M4 20 Q6 18 8 20 Q10 22 12 20" stroke="#231F20" stroke-width="1" fill="none"/>
+              <path d="M16 16 Q18 14 20 16 Q22 18 24 16" stroke="#231F20" stroke-width="1" fill="none"/>
+              <path d="M16 20 Q18 18 20 20 Q22 22 24 20" stroke="#231F20" stroke-width="1" fill="none"/>
+            </svg>
+            <div class="nav-logo-text" style="font-size:0.78rem">Au Cinéma <span>Droits Humains</span></div>
+          </div>
+          <p class="footer-desc">Festival annuel organisé par Amnesty International France.</p>
+          <div class="footer-social">
+            <a href="#" class="footer-social-link" aria-label="Facebook">
+              <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path fill="currentColor" d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg>
+            </a>
+            <a href="#" class="footer-social-link" aria-label="Instagram">
+              <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><rect x="2" y="2" width="20" height="20" rx="5" ry="5" fill="none" stroke="currentColor" stroke-width="2"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z" fill="none" stroke="currentColor" stroke-width="1.8"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"/></svg>
+            </a>
+          </div>
+        </div>
+        <div class="footer-col">
+          <h4>Navigation</h4>
+          <ul>
+            <li><a href="index.html">Accueil</a></li>
+            <li><a href="films.html">Tous les films</a></li>
+            <li><a href="programme.html">Programme</a></li>
+            <li><a href="carte.html">Carte des villes</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Amnesty International</h4>
+          <ul>
+            <li><a href="#">amnesty.fr</a></li>
+            <li><a href="#">Faire un don</a></li>
+            <li><a href="#">Contact presse</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <span>© 2027 Amnesty International France</span>
+      </div>
+    </div>
+  </footer>
+
+  <script src="js/data.js"></script>
+  <script src="js/dom-helpers.js"></script>
+  <script src="js/main.js"></script>
+  <script src="js/film-detail.js"></script>
+</body>
+</html>

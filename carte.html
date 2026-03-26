@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Carte des villes — Au Cinéma Pour les Droits Humains</title>
+  <meta name="description" content="Trouvez les diffusions du festival dans votre ville — carte interactive du sud de la France.">
+  <link rel="icon" href="faviconV2.png" type="image/png">
+  <link rel="stylesheet" href="css/style.css">
+  <!-- Leaflet -->
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
+  <style>
+    /* Carte plein écran sous la nav */
+    body { overflow: hidden; }
+    @media (max-width: 768px) { body { overflow: auto; } }
+  </style>
+</head>
+<body>
+
+  <!-- ── NAVIGATION ─────────────────────────────────────── -->
+  <nav class="nav scrolled">
+    <a href="index.html" class="nav-logo">
+      <svg viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+        <rect width="28" height="28" fill="#FFFF00"/>
+        <rect x="11" y="13" width="6" height="10" fill="#231F20"/>
+        <line x1="14" y1="13" x2="14" y2="10" stroke="#231F20" stroke-width="1.2"/>
+        <ellipse cx="14" cy="9" rx="1.5" ry="2" fill="#231F20"/>
+        <path d="M4 16 Q6 14 8 16 Q10 18 12 16" stroke="#231F20" stroke-width="1" fill="none"/>
+        <path d="M4 20 Q6 18 8 20 Q10 22 12 20" stroke="#231F20" stroke-width="1" fill="none"/>
+        <path d="M16 16 Q18 14 20 16 Q22 18 24 16" stroke="#231F20" stroke-width="1" fill="none"/>
+        <path d="M16 20 Q18 18 20 20 Q22 22 24 20" stroke="#231F20" stroke-width="1" fill="none"/>
+      </svg>
+      <div class="nav-logo-text">Au Cinéma <span>Droits Humains</span></div>
+    </a>
+    <div class="nav-links">
+      <a href="index.html"     class="nav-link">Accueil</a>
+      <a href="films.html"     class="nav-link">Films</a>
+      <a href="programme.html" class="nav-link">Programme</a>
+      <a href="carte.html"     class="nav-link">Carte</a>
+    </div>
+    <button class="nav-burger" aria-label="Menu"><span></span><span></span><span></span></button>
+  </nav>
+  <div class="nav-mobile">
+    <a href="index.html"     class="nav-link">Accueil</a>
+    <a href="films.html"     class="nav-link">Films</a>
+    <a href="programme.html" class="nav-link">Programme</a>
+    <a href="carte.html"     class="nav-link">Carte</a>
+  </div>
+
+  <!-- ── HUD ────────────────────────────────────────────── -->
+  <div class="map-hud">
+    <div class="hud-stat">
+      <span class="hud-stat-num">50</span>
+      <span class="hud-stat-label">Films</span>
+    </div>
+    <div class="hud-divider"></div>
+    <div class="hud-stat">
+      <span class="hud-stat-num">20</span>
+      <span class="hud-stat-label">Villes</span>
+    </div>
+    <div class="hud-divider"></div>
+    <div class="hud-stat">
+      <span class="hud-stat-num" id="hud-screenings">—</span>
+      <span class="hud-stat-label">Séances</span>
+    </div>
+    <div class="hud-scan-indicator">
+      <div class="hud-dot"></div>
+      <span>Festival · Mars 2027</span>
+    </div>
+  </div>
+
+  <!-- ── MAP WRAPPER ─────────────────────────────────────── -->
+  <div class="map-wrapper">
+
+    <!-- Sidebar gauche -->
+    <aside class="map-sidebar">
+      <div class="map-sidebar-header">
+        <h1 class="map-sidebar-title">Villes</h1>
+        <p class="map-sidebar-sub">Cliquez sur une ville pour voir ses diffusions</p>
+      </div>
+
+      <div class="map-sidebar-content">
+        <div class="map-city-list" id="map-city-list" aria-label="Liste des villes">
+          <!-- Injected by JS from data -->
+        </div>
+      </div>
+
+      <!-- Panel films d'une ville -->
+      <div class="map-films-panel" id="map-films-panel" style="display:none">
+        <div class="map-films-panel-header">
+          <div class="map-films-panel-city" id="map-panel-city"></div>
+        </div>
+        <div class="map-films-list" id="map-films-list" aria-label="Films dans la ville sélectionnée">
+          <!-- Injected by JS -->
+        </div>
+      </div>
+    </aside>
+
+    <!-- Carte -->
+    <div id="map" aria-label="Carte interactive des villes du festival"></div>
+  </div>
+
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+  <script src="js/data.js"></script>
+  <script src="js/dom-helpers.js"></script>
+  <script src="js/main.js"></script>
+  <script src="js/carte.js"></script>
+</body>
+</html>

@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Au Cinéma Pour les Droits Humains — Festival Amnesty International</title>
+  <meta name="description" content="Le festival de films engagé d'Amnesty International. 50 films, 20 villes du sud de la France, mars 2027.">
+  <link rel="icon" href="faviconV2.png" type="image/png">
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
+  <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js" defer></script>
+</head>
+<body>
+
+  <!-- ── NAVIGATION ───────────────────────────────────────── -->
+  <nav class="nav">
+    <a href="index.html" class="nav-logo">
+      <svg viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+        <rect width="28" height="28" fill="#FFFF00"/>
+        <rect x="11" y="13" width="6" height="10" fill="#231F20"/>
+        <line x1="14" y1="13" x2="14" y2="10" stroke="#231F20" stroke-width="1.2"/>
+        <ellipse cx="14" cy="9" rx="1.5" ry="2" fill="#231F20"/>
+        <path d="M4 16 Q6 14 8 16 Q10 18 12 16" stroke="#231F20" stroke-width="1" fill="none"/>
+        <path d="M4 20 Q6 18 8 20 Q10 22 12 20" stroke="#231F20" stroke-width="1" fill="none"/>
+        <path d="M16 16 Q18 14 20 16 Q22 18 24 16" stroke="#231F20" stroke-width="1" fill="none"/>
+        <path d="M16 20 Q18 18 20 20 Q22 22 24 20" stroke="#231F20" stroke-width="1" fill="none"/>
+      </svg>
+      <div class="nav-logo-text">Au Cinéma <span>Droits Humains</span></div>
+    </a>
+    <div class="nav-links">
+      <a href="index.html"     class="nav-link">Accueil</a>
+      <a href="films.html"     class="nav-link">Films</a>
+      <a href="programme.html" class="nav-link">Programme</a>
+      <a href="carte.html"     class="nav-link">Carte</a>
+    </div>
+    <button class="nav-burger" aria-label="Menu"><span></span><span></span><span></span></button>
+  </nav>
+  <div class="nav-mobile">
+    <a href="index.html"     class="nav-link">Accueil</a>
+    <a href="films.html"     class="nav-link">Films</a>
+    <a href="programme.html" class="nav-link">Programme</a>
+    <a href="carte.html"     class="nav-link">Carte</a>
+  </div>
+
+  <!-- ── HERO ──────────────────────────────────────────────── -->
+  <section class="hero">
+    <div class="hero-bg" aria-hidden="true"></div>
+    <div class="hero-filmstrip" aria-hidden="true">
+      <div class="hero-filmstrip-hole"></div><div class="hero-filmstrip-hole"></div>
+      <div class="hero-filmstrip-hole"></div><div class="hero-filmstrip-hole"></div>
+      <div class="hero-filmstrip-hole"></div><div class="hero-filmstrip-hole"></div>
+      <div class="hero-filmstrip-hole"></div><div class="hero-filmstrip-hole"></div>
+    </div>
+
+    <div class="hero-content">
+      <div class="hero-pre">
+        <span>Amnesty International France</span>
+        <span style="color:var(--gray-700)">·</span>
+        <span>Édition 2027</span>
+      </div>
+
+      <h1 class="hero-title">
+        <span class="line"><span>Au</span></span>
+        <span class="line"><span><em style="color:var(--yellow);font-style:normal">Cinéma</em></span></span>
+        <span class="line"><span>Pour les</span></span>
+        <span class="line"><span>Droits</span></span>
+        <span class="line"><span style="color:var(--gray-500)">Humains</span></span>
+      </h1>
+
+      <div class="countdown">
+        <div class="countdown-unit">
+          <span class="countdown-num" id="cd-days">--</span>
+          <span class="countdown-label">Jours</span>
+        </div>
+        <div class="countdown-unit">
+          <span class="countdown-num" id="cd-hours">--</span>
+          <span class="countdown-label">Heures</span>
+        </div>
+        <div class="countdown-unit">
+          <span class="countdown-num" id="cd-minutes">--</span>
+          <span class="countdown-label">Min</span>
+        </div>
+        <div class="countdown-unit">
+          <span class="countdown-num" id="cd-seconds">--</span>
+          <span class="countdown-label">Sec</span>
+        </div>
+      </div>
+
+      <div class="hero-bottom">
+        <div class="hero-dates">
+          <strong>Mars 2027</strong> — 20 villes du sud de la France<br>
+          Cinémas · Écoles · Associations
+        </div>
+        <div class="hero-actions">
+          <a href="films.html"     class="btn btn-primary">Voir tous les films</a>
+          <a href="programme.html" class="btn btn-outline">Programme complet</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="hero-scroll" aria-hidden="true">
+      <span>Défiler</span>
+      <div class="hero-scroll-line"></div>
+    </div>
+  </section>
+
+  <!-- ── ABOUT ─────────────────────────────────────────────── -->
+  <section class="about-section">
+    <div class="container">
+      <div class="about-inner">
+        <div class="about-text-col">
+          <span class="about-tag">Le Festival</span>
+          <h2 class="about-title reveal">Le cinéma<br>comme arme<br>pacifique</h2>
+          <p class="about-text reveal">
+            Chaque mois de mars, <strong>Amnesty International France</strong> transforme les cinémas, les écoles et les associations du sud de la France en espaces de dialogue et d'engagement.
+          </p>
+          <p class="about-text reveal">
+            Depuis plus de vingt ans, le festival <strong>"Au Cinéma Pour les Droits Humains"</strong> présente une sélection exigeante de documentaires et de fictions du monde entier, suivis de débats avec des militants, journalistes et experts.
+          </p>
+          <div class="about-stats reveal">
+            <div>
+              <span class="stat-num">50</span>
+              <span class="stat-label">Films sélectionnés</span>
+            </div>
+            <div>
+              <span class="stat-num">20</span>
+              <span class="stat-label">Villes partenaires</span>
+            </div>
+            <div>
+              <span class="stat-num">31</span>
+              <span class="stat-label">Jours de festival</span>
+            </div>
+          </div>
+        </div>
+        <div class="about-visual" aria-hidden="true">
+          <div class="about-frame">
+            <span class="about-frame-label">Photo du festival</span>
+            <div class="about-badge-float">Festival<br>Au Cinéma<br>2027</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── SÉLECTION OFFICIELLE ──────────────────────────────── -->
+  <section class="selection-section">
+    <div class="container">
+      <div class="section-header">
+        <div>
+          <span class="eyebrow">Sélection officielle</span>
+          <h2 class="section-title reveal">Films à<br>l'affiche</h2>
+        </div>
+        <a href="films.html" class="btn btn-outline reveal">Tous les films →</a>
+      </div>
+    </div>
+    <div style="padding: 0 clamp(1.5rem, 5vw, 4rem);">
+      <div class="selection-scroll" id="featured-films" aria-label="Films en sélection officielle"></div>
+    </div>
+  </section>
+
+  <!-- ── VILLES PHARES ─────────────────────────────────────── -->
+  <section class="cities-section">
+    <div class="container">
+      <div class="section-header">
+        <div>
+          <span class="eyebrow">En tournée</span>
+          <h2 class="section-title reveal">Villes<br>phares</h2>
+        </div>
+        <a href="carte.html" class="btn btn-outline reveal">Voir la carte →</a>
+      </div>
+      <div class="cities-grid" id="cities-grid"></div>
+      <div class="cities-minimap">
+        <div id="cities-minimap-map" style="width:100%;height:100%"></div>
+        <span class="cities-minimap-caption">20 villes · Mars 2027</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── PARTENAIRES ───────────────────────────────────────── -->
+  <section class="partners-section">
+    <div class="container">
+      <p class="partners-title">Avec le soutien de</p>
+      <div class="partners-grid">
+        <div class="partner-placeholder"><span>Partenaire 1</span></div>
+        <div class="partner-placeholder"><span>Partenaire 2</span></div>
+        <div class="partner-placeholder"><span>Partenaire 3</span></div>
+        <div class="partner-placeholder"><span>Partenaire 4</span></div>
+        <div class="partner-placeholder"><span>Partenaire 5</span></div>
+        <div class="partner-placeholder"><span>Presse</span></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── FOOTER ────────────────────────────────────────────── -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <div class="nav-logo" style="margin-bottom:1rem">
+            <svg viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg" style="width:22px;height:22px" aria-hidden="true">
+              <rect width="28" height="28" fill="#FFFF00"/>
+              <rect x="11" y="13" width="6" height="10" fill="#231F20"/>
+              <line x1="14" y1="13" x2="14" y2="10" stroke="#231F20" stroke-width="1.2"/>
+              <ellipse cx="14" cy="9" rx="1.5" ry="2" fill="#231F20"/>
+              <path d="M4 16 Q6 14 8 16 Q10 18 12 16" stroke="#231F20" stroke-width="1" fill="none"/>
+              <path d="M4 20 Q6 18 8 20 Q10 22 12 20" stroke="#231F20" stroke-width="1" fill="none"/>
+              <path d="M16 16 Q18 14 20 16 Q22 18 24 16" stroke="#231F20" stroke-width="1" fill="none"/>
+              <path d="M16 20 Q18 18 20 20 Q22 22 24 20" stroke="#231F20" stroke-width="1" fill="none"/>
+            </svg>
+            <div class="nav-logo-text" style="font-size:0.78rem">Au Cinéma <span>Droits Humains</span></div>
+          </div>
+          <p class="footer-desc">Festival annuel de films organisé par Amnesty International France dans le sud de la France. Le cinéma au service des droits humains.</p>
+          <div class="footer-social">
+            <a href="#" class="footer-social-link" aria-label="Facebook">
+              <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path fill="currentColor" d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg>
+            </a>
+            <a href="#" class="footer-social-link" aria-label="Instagram">
+              <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><rect x="2" y="2" width="20" height="20" rx="5" ry="5" fill="none" stroke="currentColor" stroke-width="2"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z" fill="none" stroke="currentColor" stroke-width="1.8"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"/></svg>
+            </a>
+          </div>
+        </div>
+        <div class="footer-col">
+          <h4>Navigation</h4>
+          <ul>
+            <li><a href="index.html">Accueil</a></li>
+            <li><a href="films.html">Tous les films</a></li>
+            <li><a href="programme.html">Programme</a></li>
+            <li><a href="carte.html">Carte des villes</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Amnesty International</h4>
+          <ul>
+            <li><a href="#">amnesty.fr</a></li>
+            <li><a href="#">Faire un don</a></li>
+            <li><a href="#">S'engager</a></li>
+            <li><a href="#">Contact presse</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <span>© 2027 Amnesty International France — Festival Au Cinéma Pour les Droits Humains</span>
+        <span>Mentions légales</span>
+      </div>
+    </div>
+  </footer>
+
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+  <script src="js/data.js"></script>
+  <script src="js/dom-helpers.js"></script>
+  <script src="js/main.js"></script>
+  <script src="js/home.js"></script>
+</body>
+</html>
