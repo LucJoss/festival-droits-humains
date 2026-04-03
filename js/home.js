@@ -65,7 +65,7 @@ document.addEventListener('DOMContentLoaded', () => {
       if (!cityCount[city.name]) return;
       const icon = L.divIcon({
         className: '',
-        html: '<div class="amnesty-marker" role="img" aria-label="Ville du festival"><div class="amnesty-marker-dot"></div></div>',
+        html: '<div class="amnesty-marker" role="img" aria-label="Ville du festival"><img src="faviconV2.png" class="amnesty-marker-logo" alt=""></div>',
         iconSize:   [28, 28],
         iconAnchor: [14, 28],
       });

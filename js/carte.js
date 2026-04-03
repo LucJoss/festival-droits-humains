@@ -38,7 +38,7 @@ document.addEventListener('DOMContentLoaded', () => {
   function makeIcon(active = false) {
     return L.divIcon({
       className: '',
-      html: `<div class="amnesty-marker${active ? ' active' : ''}" role="img" aria-label="Ville du festival"><div class="amnesty-marker-dot"></div></div>`,
+      html: `<div class="amnesty-marker${active ? ' active' : ''}" role="img" aria-label="Ville du festival"><img src="faviconV2.png" class="amnesty-marker-logo" alt=""></div>`,
       iconSize:    [28, 28],
       iconAnchor:  [14, 28],
       popupAnchor: [0, -30],

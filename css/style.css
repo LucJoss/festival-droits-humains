@@ -7,9 +7,9 @@
 
 /* ── Variables ─────────────────────────────────────────── */
 :root {
-  --yellow:       #FFFF00;
-  --yellow-dim:   rgba(255,255,0,0.12);
-  --yellow-glow:  rgba(255,255,0,0.25);
+  --yellow:       #FFE033;
+  --yellow-dim:   rgba(255,224,51,0.12);
+  --yellow-glow:  rgba(255,224,51,0.25);
   --black:        #231F20;
   --bg:           #0E0C0C;
   --bg-card:      #181414;
@@ -1819,11 +1819,11 @@ body::before {
   background: var(--yellow);
   border-radius: 50% 50% 50% 0;
   transform: rotate(-45deg);
-  box-shadow: 0 2px 12px rgba(255,255,0,0.4);
+  box-shadow: 0 2px 12px rgba(255,224,51,0.4);
   transition: transform 0.25s var(--ease), box-shadow 0.25s, background 0.25s;
 }
 .amnesty-marker:hover {
-  box-shadow: 0 4px 20px rgba(255,255,0,0.6);
+  box-shadow: 0 4px 20px rgba(255,224,51,0.6);
   transform: rotate(-45deg) scale(1.15);
 }
 .amnesty-marker.active {
@@ -1831,15 +1831,13 @@ body::before {
   box-shadow: 0 4px 24px rgba(255,255,255,0.5), 0 0 0 3px rgba(255,255,255,0.2);
   transform: rotate(-45deg) scale(1.2);
 }
-.amnesty-marker-dot {
-  width: 6px;
-  height: 6px;
-  background: var(--black);
-  border-radius: 50%;
+.amnesty-marker-logo {
+  width: 14px;
+  height: 14px;
+  object-fit: contain;
   transform: rotate(45deg);
-}
-.amnesty-marker.active .amnesty-marker-dot {
-  background: var(--yellow);
+  filter: brightness(0);
+  display: block;
 }
 
 /* Futuristic popup */
