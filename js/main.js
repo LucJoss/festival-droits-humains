@@ -7,11 +7,17 @@ document.addEventListener('DOMContentLoaded', () => {
   /* ── Nav scroll effect ─────────────────────────────────── */
   const nav = document.querySelector('.nav');
   if (nav) {
-    const onScroll = () => {
-      nav.classList.toggle('scrolled', window.scrollY > 20);
-    };
-    window.addEventListener('scroll', onScroll, { passive: true });
-    onScroll();
+    const hasHero = !!document.querySelector('.hero');
+    if (!hasHero) {
+      /* Pages sans hero plein écran : nav toujours visible */
+      nav.classList.add('scrolled');
+    } else {
+      const onScroll = () => {
+        nav.classList.toggle('scrolled', window.scrollY > 20);
+      };
+      window.addEventListener('scroll', onScroll, { passive: true });
+      onScroll();
+    }
   }
 
   /* ── Mobile burger ─────────────────────────────────────── */
@@ -37,6 +43,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const href = link.getAttribute('href');
     if (href && (href === currentPage || (currentPage === '' && href === 'index.html'))) {
       link.classList.add('active');
+      link.setAttribute('aria-current', 'page');
     }
   });
 
@@ -84,17 +91,40 @@ document.addEventListener('DOMContentLoaded', () => {
     seconds: document.getElementById('cd-seconds'),
   };
   if (countdownEls.days) {
-    const target = new Date('2027-03-01T18:00:00').getTime();
+    const festivalStart = new Date('2027-03-01T18:00:00').getTime();
+    const festivalEnd   = new Date('2027-03-31T23:59:59').getTime();
+    const countdownWrap = countdownEls.days.closest('.countdown');
+
+    const showLive = (msg, sub) => {
+      if (!countdownWrap) return;
+      while (countdownWrap.firstChild) countdownWrap.removeChild(countdownWrap.firstChild);
+      const box   = document.createElement('div');
+      box.className = 'countdown-live';
+      const label = document.createElement('div');
+      label.className = 'countdown-live-label';
+      const dot = document.createElement('span');
+      dot.className = 'countdown-live-dot';
+      label.appendChild(dot);
+      label.appendChild(document.createTextNode(msg));
+      const subEl = document.createElement('div');
+      subEl.className = 'countdown-live-sub';
+      subEl.textContent = sub;
+      box.appendChild(label);
+      box.appendChild(subEl);
+      countdownWrap.appendChild(box);
+    };
+
     const tick = () => {
-      const now  = Date.now();
-      const diff = target - now;
-      if (diff <= 0) {
-        countdownEls.days.textContent    = '00';
-        countdownEls.hours.textContent   = '00';
-        countdownEls.minutes.textContent = '00';
-        countdownEls.seconds.textContent = '00';
+      const now = Date.now();
+      if (now >= festivalStart && now <= festivalEnd) {
+        showLive('Festival en cours', 'Mars 2027 · Sud de la France');
         return;
       }
+      if (now > festivalEnd) {
+        showLive('À l\'année prochaine !', 'Festival 2028 · Amnesty International France');
+        return;
+      }
+      const diff = festivalStart - now;
       const pad = n => String(Math.floor(n)).padStart(2, '0');
       countdownEls.days.textContent    = pad(diff / 86400000);
       countdownEls.hours.textContent   = pad((diff % 86400000) / 3600000);

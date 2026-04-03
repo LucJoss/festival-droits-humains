@@ -4,8 +4,16 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Films — Au Cinéma Pour les Droits Humains</title>
-  <meta name="description" content="Découvrez les 50 films de la sélection officielle du festival Amnesty International.">
+  <meta name="description" content="Découvrez les 50 films de la sélection officielle du festival Amnesty International. Documentaires et fictions, long et court métrages.">
   <link rel="icon" href="faviconV2.png" type="image/png">
+  <!-- Open Graph -->
+  <meta property="og:type"        content="website">
+  <meta property="og:title"       content="Films — Au Cinéma Pour les Droits Humains 2027">
+  <meta property="og:description" content="50 films sélectionnés : documentaires et fictions, long et court métrages. Filtrez par thématique, format et ville.">
+  <meta property="og:image"       content="https://lucjoss.github.io/festival-droits-humains/og-cover.png">
+  <meta property="og:url"         content="https://lucjoss.github.io/festival-droits-humains/films.html">
+  <meta property="og:locale"      content="fr_FR">
+  <meta name="twitter:card"       content="summary_large_image">
   <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
@@ -14,7 +22,7 @@
   <nav class="nav">
     <a href="index.html" class="nav-logo">
       <img src="faviconV2.png" alt="Amnesty International" class="nav-logo-img">
-      <div class="nav-logo-text">Au Cinéma <span>Droits Humains</span></div>
+      <div class="nav-logo-text">Au Cinéma <span>Pour les Droits Humains</span></div>
     </a>
     <div class="nav-links">
       <a href="index.html"     class="nav-link">Accueil</a>
@@ -40,37 +48,41 @@
 
   <!-- ── FILTER BAR ──────────────────────────────────────── -->
   <div class="filter-bar" role="search" aria-label="Filtres">
-    <div class="filter-bar-inner">
 
-      <!-- Format -->
+    <!-- Thématiques — ligne principale -->
+    <div class="filter-themes" role="group" aria-label="Thématique">
+      <button class="filter-theme active" data-val="tous">Toutes</button>
+      <button class="filter-theme" data-val="migration">Migration &amp; Exil</button>
+      <button class="filter-theme" data-val="justice">Justice &amp; Impunité</button>
+      <button class="filter-theme" data-val="genre">Genre &amp; Identité</button>
+      <button class="filter-theme" data-val="resistance">Résistances</button>
+      <button class="filter-theme" data-val="climat">Urgence Climatique</button>
+      <button class="filter-theme" data-val="presse">Liberté de la Presse</button>
+    </div>
+
+    <!-- Filtres secondaires -->
+    <div class="filter-bar-inner">
       <div class="filter-group" role="group" aria-label="Format">
         <button class="filter-btn active" data-group="format" data-val="tous">Tous</button>
         <button class="filter-btn" data-group="format" data-val="long">Long métrage</button>
         <button class="filter-btn" data-group="format" data-val="court">Court métrage</button>
       </div>
-
-      <!-- Genre -->
       <div class="filter-group" role="group" aria-label="Genre">
         <button class="filter-btn active" data-group="genre" data-val="tous">Tous</button>
         <button class="filter-btn" data-group="genre" data-val="documentaire">Documentaire</button>
         <button class="filter-btn" data-group="genre" data-val="fiction">Fiction</button>
       </div>
-
-      <!-- Public -->
-      <div class="filter-group" role="group" aria-label="Type de diffusion">
-        <button class="filter-btn active" data-group="public" data-val="tous">Toutes diffusions</button>
-        <button class="filter-btn" data-group="public" data-val="cinema">Cinémas</button>
-        <button class="filter-btn" data-group="public" data-val="ecole">Écoles</button>
-        <button class="filter-btn" data-group="public" data-val="association">Associations</button>
-      </div>
-
-      <!-- Ville -->
       <select id="filter-ville" class="filter-select" aria-label="Filtrer par ville">
         <option value="toutes">Toutes les villes</option>
       </select>
-
+      <div class="prog-search-wrap">
+        <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" stroke="currentColor">
+          <circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/>
+        </svg>
+        <input type="search" id="films-search" placeholder="Titre, réalisateur…" autocomplete="off" aria-label="Rechercher un film">
+      </div>
       <div class="films-count">
-        <strong id="films-count-num">50</strong> film(s)
+        <strong id="films-count-num">50</strong> <span id="films-count-label">films</span>
       </div>
     </div>
   </div>
@@ -87,16 +99,13 @@
     <div class="container">
       <div class="footer-grid">
         <div class="footer-brand">
-          <div class="nav-logo" style="margin-bottom:1rem">
-            <img src="faviconV2.png" alt="Amnesty International" class="nav-logo-img" style="width:22px;height:22px">
-            <div class="nav-logo-text" style="font-size:0.78rem">Au Cinéma <span>Droits Humains</span></div>
-          </div>
+          <div class="nav-logo-text" style="font-size:0.85rem;margin-bottom:1rem;font-weight:700;text-transform:uppercase;letter-spacing:0.05em">Au Cinéma <span>Pour les Droits Humains</span></div>
           <p class="footer-desc">Festival annuel de films organisé par Amnesty International France dans le sud de la France.</p>
           <div class="footer-social">
-            <a href="#" class="footer-social-link" aria-label="Facebook">
+            <a href="https://www.facebook.com/acdhamnesty" class="footer-social-link" aria-label="Facebook" target="_blank" rel="noopener">
               <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path fill="currentColor" d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg>
             </a>
-            <a href="#" class="footer-social-link" aria-label="Instagram">
+            <a href="https://www.instagram.com/festivalacdh/" class="footer-social-link" aria-label="Instagram" target="_blank" rel="noopener">
               <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><rect x="2" y="2" width="20" height="20" rx="5" ry="5" fill="none" stroke="currentColor" stroke-width="2"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z" fill="none" stroke="currentColor" stroke-width="1.8"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"/></svg>
             </a>
           </div>
@@ -127,6 +136,7 @@
   </footer>
 
   <script src="js/data.js"></script>
+  <script src="js/admin-sync.js"></script>
   <script src="js/dom-helpers.js"></script>
   <script src="js/main.js"></script>
   <script src="js/films.js"></script>

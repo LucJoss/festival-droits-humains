@@ -8,41 +8,27 @@ document.addEventListener('DOMContentLoaded', () => {
   const featuredContainer = document.getElementById('featured-films');
   if (featuredContainer) {
     const featured = FILMS.slice(0, 6);
-    featured.forEach(film => {
-      const wrapper = el('div', { cls: 'selection-item' });
-      wrapper.appendChild(createFilmCard(film));
+    featured.forEach((film, i) => {
+      const cls = i === 0 ? ['selection-item', 'selection-item--featured'] : ['selection-item'];
+      const wrapper = el('div', { cls });
+      const card = createFilmCard(film);
+      if (i === 0) {
+        const badge = el('div', { cls: 'featured-badge', text: 'Film d\'ouverture' });
+        card.querySelector('.card-poster').appendChild(badge);
+      }
+      wrapper.appendChild(card);
       featuredContainer.appendChild(wrapper);
     });
   }
 
-  /* ── Top 4 villes par nombre de séances ─────────────── */
-  const cityMap = {};
-  FILMS.forEach(f => f.screenings.forEach(s => {
-    cityMap[s.city] = (cityMap[s.city] || 0) + 1;
-  }));
-
-  const topCities = Object.entries(cityMap)
-    .sort((a, b) => b[1] - a[1])
-    .slice(0, 4);
-
-  const citiesGrid = document.getElementById('cities-grid');
-  if (citiesGrid) {
-    topCities.forEach(([city, count], i) => {
-      const numEl   = el('div', { cls: 'city-num', text: '0' + (i + 1) });
-      const nameEl  = el('div', { cls: 'city-name', text: city });
-      const filmsEl = el('div', {
-        cls: 'city-films',
-        text: count + ' séance' + (count > 1 ? 's' : '')
-      });
-      const arrowEl = el('div', { cls: 'city-arrow', text: '→' });
-
-      const card = el('a', {
-        cls: ['city-card', 'reveal'],
-        attrs: { href: 'carte.html' },
-        children: [numEl, nameEl, filmsEl, arrowEl]
-      });
-
-      citiesGrid.appendChild(card);
+  /* ── Keyboard nav carousel ──────────────────────────── */
+  if (featuredContainer) {
+    featuredContainer.setAttribute('tabindex', '0');
+    featuredContainer.setAttribute('role', 'region');
+    featuredContainer.setAttribute('aria-label', 'Films en sélection officielle — navigation avec les flèches');
+    featuredContainer.addEventListener('keydown', e => {
+      if (e.key === 'ArrowRight') { featuredContainer.scrollBy({ left: 320, behavior: 'smooth' }); e.preventDefault(); }
+      if (e.key === 'ArrowLeft')  { featuredContainer.scrollBy({ left: -320, behavior: 'smooth' }); e.preventDefault(); }
     });
   }
 
@@ -74,16 +60,16 @@ document.addEventListener('DOMContentLoaded', () => {
       cityCount[s.city] = (cityCount[s.city] || 0) + 1;
     }));
 
-    /* Place dots */
+    /* Place markers — même style que la page carte */
     CITIES.forEach(city => {
       if (!cityCount[city.name]) return;
-      const dot = L.divIcon({
+      const icon = L.divIcon({
         className: '',
-        html: '<div class="map-dot"><div class="map-dot-ring"></div><div class="map-dot-core"></div></div>',
-        iconSize: [20, 20],
-        iconAnchor: [10, 10],
+        html: '<div class="amnesty-marker" role="img" aria-label="Ville du festival"><div class="amnesty-marker-dot"></div></div>',
+        iconSize:   [28, 28],
+        iconAnchor: [14, 28],
       });
-      L.marker([city.lat, city.lng], { icon: dot })
+      L.marker([city.lat, city.lng], { icon })
         .addTo(minimap)
         .on('click', () => { window.location.href = 'carte.html'; });
     });

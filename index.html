@@ -6,6 +6,47 @@
   <title>Au Cinéma Pour les Droits Humains — Festival Amnesty International</title>
   <meta name="description" content="Le festival de films engagé d'Amnesty International. 50 films, 20 villes du sud de la France, mars 2027.">
   <link rel="icon" href="faviconV2.png" type="image/png">
+  <!-- Open Graph -->
+  <meta property="og:type"        content="website">
+  <meta property="og:title"       content="Au Cinéma Pour les Droits Humains — Festival Amnesty International">
+  <meta property="og:description" content="50 films, 20 villes du sud de la France, mars 2027. Le festival de cinéma engagé d'Amnesty International France.">
+  <meta property="og:image"       content="https://lucjoss.github.io/festival-droits-humains/og-cover.png">
+  <meta property="og:url"         content="https://lucjoss.github.io/festival-droits-humains/">
+  <meta property="og:locale"      content="fr_FR">
+  <meta name="twitter:card"       content="summary_large_image">
+  <meta name="twitter:title"      content="Au Cinéma Pour les Droits Humains 2027">
+  <meta name="twitter:description" content="50 films, 20 villes, entrée libre — mars 2027, sud de la France.">
+  <meta name="twitter:image"      content="https://lucjoss.github.io/festival-droits-humains/og-cover.png">
+  <!-- Structured data -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "Organization",
+        "@id": "https://lucjoss.github.io/festival-droits-humains/#organization",
+        "name": "Amnesty International France",
+        "url": "https://www.amnesty.fr",
+        "logo": "https://lucjoss.github.io/festival-droits-humains/faviconV2.png",
+        "contactPoint": { "@type": "ContactPoint", "email": "acdhamnesty@gmail.com" }
+      },
+      {
+        "@type": "Event",
+        "@id": "https://lucjoss.github.io/festival-droits-humains/#event",
+        "name": "Au Cinéma Pour les Droits Humains — 13ème édition",
+        "description": "Festival annuel de films organisé par Amnesty International France. 50 films, documentaires et fictions, dans 20 villes du sud de la France.",
+        "startDate": "2027-03-01",
+        "endDate": "2027-03-31",
+        "eventStatus": "https://schema.org/EventScheduled",
+        "eventAttendanceMode": "https://schema.org/OfflineEventAttendanceMode",
+        "location": { "@type": "Place", "name": "Sud de la France", "address": { "@type": "PostalAddress", "addressCountry": "FR", "addressRegion": "Occitanie, Provence-Alpes-Côte d'Azur" } },
+        "organizer": { "@id": "https://lucjoss.github.io/festival-droits-humains/#organization" },
+        "isAccessibleForFree": true,
+        "url": "https://lucjoss.github.io/festival-droits-humains/"
+      }
+    ]
+  }
+  </script>
   <link rel="stylesheet" href="css/style.css">
   <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
   <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js" defer></script>
@@ -16,7 +57,7 @@
   <nav class="nav">
     <a href="index.html" class="nav-logo">
       <img src="faviconV2.png" alt="Amnesty International" class="nav-logo-img">
-      <div class="nav-logo-text">Au Cinéma <span>Droits Humains</span></div>
+      <div class="nav-logo-text">Au Cinéma <span>Pour les Droits Humains</span></div>
     </a>
     <div class="nav-links">
       <a href="index.html"     class="nav-link">Accueil</a>
@@ -36,51 +77,44 @@
   <!-- ── HERO ──────────────────────────────────────────────── -->
   <section class="hero">
     <div class="hero-bg" aria-hidden="true"></div>
-    <div class="hero-filmstrip" aria-hidden="true">
-      <div class="hero-filmstrip-hole"></div><div class="hero-filmstrip-hole"></div>
-      <div class="hero-filmstrip-hole"></div><div class="hero-filmstrip-hole"></div>
-      <div class="hero-filmstrip-hole"></div><div class="hero-filmstrip-hole"></div>
-      <div class="hero-filmstrip-hole"></div><div class="hero-filmstrip-hole"></div>
-    </div>
+    <div class="hero-year" aria-hidden="true">2027</div>
 
-    <div class="hero-content">
-      <div class="hero-pre">
-        <span>Amnesty International France</span>
-        <span style="color:var(--gray-700)">·</span>
-        <span>Édition 2027</span>
-      </div>
-
-      <h1 class="hero-title">
-        <span class="line"><span>Au</span></span>
-        <span class="line"><span><em style="color:var(--yellow);font-style:normal">Cinéma</em></span></span>
-        <span class="line"><span>Pour les</span></span>
-        <span class="line"><span>Droits</span></span>
-        <span class="line"><span style="color:var(--gray-500)">Humains</span></span>
-      </h1>
-
-      <div class="countdown">
-        <div class="countdown-unit">
-          <span class="countdown-num" id="cd-days">--</span>
-          <span class="countdown-label">Jours</span>
+<div class="hero-content">
+      <div class="hero-left">
+        <div class="hero-pre">
+          <span>Amnesty International France</span>
+          <span style="color:var(--gray-700)">·</span>
+          <span>Édition 2027</span>
         </div>
-        <div class="countdown-unit">
-          <span class="countdown-num" id="cd-hours">--</span>
-          <span class="countdown-label">Heures</span>
-        </div>
-        <div class="countdown-unit">
-          <span class="countdown-num" id="cd-minutes">--</span>
-          <span class="countdown-label">Min</span>
-        </div>
-        <div class="countdown-unit">
-          <span class="countdown-num" id="cd-seconds">--</span>
-          <span class="countdown-label">Sec</span>
-        </div>
-      </div>
-
-      <div class="hero-bottom">
+        <h1 class="hero-title">
+          <span class="line"><span>Au <em style="color:var(--yellow);font-style:normal">Cinéma</em></span></span>
+          <span class="line"><span>Pour les Droits</span></span>
+          <span class="line"><span style="color:var(--gray-300)">Humains</span></span>
+        </h1>
         <div class="hero-dates">
           <strong>Mars 2027</strong> — 20 villes du sud de la France<br>
           Cinémas · Écoles · Associations
+        </div>
+      </div>
+
+      <div class="hero-right">
+        <div class="countdown">
+          <div class="countdown-unit">
+            <span class="countdown-num" id="cd-days">--</span>
+            <span class="countdown-label">Jours</span>
+          </div>
+          <div class="countdown-unit">
+            <span class="countdown-num" id="cd-hours">--</span>
+            <span class="countdown-label">Heures</span>
+          </div>
+          <div class="countdown-unit">
+            <span class="countdown-num" id="cd-minutes">--</span>
+            <span class="countdown-label">Min</span>
+          </div>
+          <div class="countdown-unit">
+            <span class="countdown-num" id="cd-seconds">--</span>
+            <span class="countdown-label">Sec</span>
+          </div>
         </div>
         <div class="hero-actions">
           <a href="films.html"     class="btn btn-primary">Voir tous les films</a>
@@ -89,9 +123,15 @@
       </div>
     </div>
 
-    <div class="hero-scroll" aria-hidden="true">
-      <span>Défiler</span>
-      <div class="hero-scroll-line"></div>
+  </section>
+
+  <!-- ── MANIFESTO ────────────────────────────────────────── -->
+  <section class="manifesto-section">
+    <div class="container">
+      <div class="manifesto-inner">
+        <p class="manifesto-text">Chaque film, un témoignage.<br>Chaque projection, un acte.</p>
+        <span class="manifesto-sub">Un festival de cinéma engagé qui transforme les salles en espaces de résistance — documentaires, fictions, débats ouverts au public.</span>
+      </div>
     </div>
   </section>
 
@@ -103,10 +143,7 @@
           <span class="about-tag">Le Festival</span>
           <h2 class="about-title reveal">Le cinéma<br>comme arme<br>pacifique</h2>
           <p class="about-text reveal">
-            Chaque mois de mars, <strong>Amnesty International France</strong> transforme les cinémas, les écoles et les associations du sud de la France en espaces de dialogue et d'engagement.
-          </p>
-          <p class="about-text reveal">
-            Depuis plus de vingt ans, le festival <strong>"Au Cinéma Pour les Droits Humains"</strong> présente une sélection exigeante de documentaires et de fictions du monde entier, suivis de débats avec des militants, journalistes et experts.
+            Chaque mois de mars, <strong>Amnesty International France</strong> transforme les cinémas, les écoles et les associations du sud de la France en espaces de dialogue et d'engagement — documentaires, fictions, débats avec des militants, journalistes et experts.
           </p>
           <div class="about-stats reveal">
             <div>
@@ -124,17 +161,65 @@
           </div>
         </div>
         <div class="about-visual" aria-hidden="true">
-          <div class="about-frame">
-            <div class="about-frame-content">
-              <img src="faviconV2.png" alt="" class="about-frame-logo">
-              <span class="about-frame-label">Photo officielle — à venir</span>
-              <span class="about-frame-sub">2027</span>
+          <div class="about-themes">
+            <div class="about-themes-header">
+              <span class="about-themes-edition">13<sup>ème</sup> édition</span>
+              <span class="about-themes-tag">Thématiques 2027</span>
             </div>
-            <div class="about-badge-float">
-              <img src="faviconV2.png" alt="Amnesty International" class="about-badge-float-logo">
-              <span class="about-badge-float-text">Festival<br>Au Cinéma<br>2027</span>
+            <div class="about-theme-item">
+              <span class="about-theme-num">01</span>
+              <span class="about-theme-name">Migration & Exil</span>
+            </div>
+            <div class="about-theme-item">
+              <span class="about-theme-num">02</span>
+              <span class="about-theme-name">Justice & Impunité</span>
+            </div>
+            <div class="about-theme-item">
+              <span class="about-theme-num">03</span>
+              <span class="about-theme-name">Genre & Identité</span>
+            </div>
+            <div class="about-theme-item">
+              <span class="about-theme-num">04</span>
+              <span class="about-theme-name">Résistances</span>
+            </div>
+            <div class="about-theme-item">
+              <span class="about-theme-num">05</span>
+              <span class="about-theme-name">Urgence Climatique</span>
+            </div>
+            <div class="about-theme-item">
+              <span class="about-theme-num">06</span>
+              <span class="about-theme-name">Liberté de la Presse</span>
             </div>
           </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── PREUVE SOCIALE ───────────────────────────────────── -->
+  <section class="proof-section">
+    <div class="container">
+      <div class="proof-quote-block reveal">
+        <span class="proof-quote-mark">"</span>
+        <blockquote class="proof-quote-text">Vingt ans que nous croyons que l'image peut changer le monde.</blockquote>
+        <cite class="proof-quote-cite">Amnesty International France</cite>
+      </div>
+      <div class="proof-stats">
+        <div class="proof-stat reveal">
+          <span class="proof-num">+20</span>
+          <span class="proof-label">Ans d'existence</span>
+        </div>
+        <div class="proof-stat reveal">
+          <span class="proof-num">13</span>
+          <span class="proof-label">Éditions organisées</span>
+        </div>
+        <div class="proof-stat reveal">
+          <span class="proof-num">600+</span>
+          <span class="proof-label">Films projetés</span>
+        </div>
+        <div class="proof-stat reveal">
+          <span class="proof-num">100%</span>
+          <span class="proof-label">Entrée libre</span>
         </div>
       </div>
     </div>
@@ -151,9 +236,10 @@
         <a href="films.html" class="btn btn-outline reveal">Tous les films →</a>
       </div>
     </div>
-    <div style="padding: 0 clamp(1.5rem, 5vw, 4rem);">
+    <div style="padding: 0 clamp(1.5rem, 5vw, 4rem);" class="selection-scroll-wrap">
       <div class="selection-scroll" id="featured-films" aria-label="Films en sélection officielle"></div>
     </div>
+    <p class="selection-scroll-hint"><span>←</span> Faire défiler <span>→</span></p>
   </section>
 
   <!-- ── VILLES PHARES ─────────────────────────────────────── -->
@@ -161,12 +247,11 @@
     <div class="container">
       <div class="section-header">
         <div>
-          <span class="eyebrow">En tournée</span>
+          <span class="eyebrow">Itinéraire 2027</span>
           <h2 class="section-title reveal">Villes<br>phares</h2>
         </div>
         <a href="carte.html" class="btn btn-outline reveal">Voir la carte →</a>
       </div>
-      <div class="cities-grid" id="cities-grid"></div>
       <div class="cities-minimap">
         <div id="cities-minimap-map" style="width:100%;height:100%"></div>
         <span class="cities-minimap-caption">20 villes · Mars 2027</span>
@@ -179,12 +264,30 @@
     <div class="container">
       <p class="partners-title">Avec le soutien de</p>
       <div class="partners-grid">
-        <div class="partner-placeholder"><span>Partenaire 1</span></div>
-        <div class="partner-placeholder"><span>Partenaire 2</span></div>
-        <div class="partner-placeholder"><span>Partenaire 3</span></div>
-        <div class="partner-placeholder"><span>Partenaire 4</span></div>
-        <div class="partner-placeholder"><span>Partenaire 5</span></div>
-        <div class="partner-placeholder"><span>Presse</span></div>
+        <div class="partner-card">
+          <span class="partner-card-name">MK2</span>
+          <span class="partner-card-type">Salles de cinéma</span>
+        </div>
+        <div class="partner-card">
+          <span class="partner-card-name">Le Bon Coin</span>
+          <span class="partner-card-type">Mécène principal</span>
+        </div>
+        <div class="partner-card">
+          <span class="partner-card-name">Région SUD</span>
+          <span class="partner-card-type">Collectivité</span>
+        </div>
+        <div class="partner-card">
+          <span class="partner-card-name">Le Monde</span>
+          <span class="partner-card-type">Partenaire presse</span>
+        </div>
+        <div class="partner-card">
+          <span class="partner-card-name">ADRC</span>
+          <span class="partner-card-type">Diffusion cinéma</span>
+        </div>
+        <div class="partner-card">
+          <span class="partner-card-name">CNC</span>
+          <span class="partner-card-type">Soutien public</span>
+        </div>
       </div>
     </div>
   </section>
@@ -194,16 +297,13 @@
     <div class="container">
       <div class="footer-grid">
         <div class="footer-brand">
-          <div class="nav-logo" style="margin-bottom:1rem">
-            <img src="faviconV2.png" alt="Amnesty International" class="nav-logo-img" style="width:22px;height:22px">
-            <div class="nav-logo-text" style="font-size:0.78rem">Au Cinéma <span>Droits Humains</span></div>
-          </div>
+          <div class="nav-logo-text" style="font-size:0.85rem;margin-bottom:1rem;font-weight:700;text-transform:uppercase;letter-spacing:0.05em">Au Cinéma <span>Pour les Droits Humains</span></div>
           <p class="footer-desc">Festival annuel de films organisé par Amnesty International France dans le sud de la France. Le cinéma au service des droits humains.</p>
           <div class="footer-social">
-            <a href="#" class="footer-social-link" aria-label="Facebook">
+            <a href="https://www.facebook.com/acdhamnesty" class="footer-social-link" aria-label="Facebook" target="_blank" rel="noopener">
               <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path fill="currentColor" d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg>
             </a>
-            <a href="#" class="footer-social-link" aria-label="Instagram">
+            <a href="https://www.instagram.com/festivalacdh/" class="footer-social-link" aria-label="Instagram" target="_blank" rel="noopener">
               <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><rect x="2" y="2" width="20" height="20" rx="5" ry="5" fill="none" stroke="currentColor" stroke-width="2"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z" fill="none" stroke="currentColor" stroke-width="1.8"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"/></svg>
             </a>
           </div>
@@ -234,8 +334,9 @@
     </div>
   </footer>
 
-  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" defer></script>
   <script src="js/data.js"></script>
+  <script src="js/admin-sync.js"></script>
   <script src="js/dom-helpers.js"></script>
   <script src="js/main.js"></script>
   <script src="js/home.js"></script>

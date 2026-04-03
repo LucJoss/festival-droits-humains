@@ -25,8 +25,16 @@ document.addEventListener('DOMContentLoaded', () => {
     return;
   }
 
-  /* ── Titre de la page ───────────────────────────────────── */
+  /* ── Titre de la page + OG meta ────────────────────────── */
   document.title = film.title + ' — Au Cinéma Pour les Droits Humains';
+  const directorStr = Array.isArray(film.director) ? film.director.join(' / ') : film.director;
+  const metaDesc = `${film.title} — réalisé par ${directorStr}. ${film.format}, ${film.genre}. ${film.screenings.length} diffusion${film.screenings.length > 1 ? 's' : ''} en mars 2027.`;
+  const ogTitle  = document.getElementById('og-title');
+  const ogDesc   = document.getElementById('og-description');
+  const ogUrl    = document.getElementById('og-url');
+  if (ogTitle) ogTitle.setAttribute('content', film.title + ' — Au Cinéma Pour les Droits Humains 2027');
+  if (ogDesc)  ogDesc.setAttribute('content', metaDesc);
+  if (ogUrl)   ogUrl.setAttribute('content', window.location.href);
 
   /* ── Hero ───────────────────────────────────────────────── */
   const heroTitle = document.getElementById('detail-title');
@@ -35,7 +43,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const heroDirector = document.getElementById('detail-director');
   if (heroDirector) {
     heroDirector.appendChild(txt('Réalisé par '));
-    const strong = el('strong', { text: film.director });
+    const strong = el('strong', { text: Array.isArray(film.director) ? film.director.join(' / ') : film.director });
     heroDirector.appendChild(strong);
   }
 

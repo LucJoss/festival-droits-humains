@@ -4,7 +4,16 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Film — Au Cinéma Pour les Droits Humains</title>
+  <meta name="description" content="Fiche film — festival Au Cinéma Pour les Droits Humains, Amnesty International France, mars 2027.">
   <link rel="icon" href="faviconV2.png" type="image/png">
+  <!-- Open Graph (mis à jour dynamiquement par film-detail.js) -->
+  <meta property="og:type"        content="video.movie">
+  <meta property="og:title"       id="og-title"       content="Film — Au Cinéma Pour les Droits Humains 2027">
+  <meta property="og:description" id="og-description" content="Fiche film — festival Amnesty International France, mars 2027.">
+  <meta property="og:image"       content="https://lucjoss.github.io/festival-droits-humains/og-cover.png">
+  <meta property="og:url"         id="og-url"         content="https://lucjoss.github.io/festival-droits-humains/film-detail.html">
+  <meta property="og:locale"      content="fr_FR">
+  <meta name="twitter:card"       content="summary_large_image">
   <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
@@ -13,7 +22,7 @@
   <nav class="nav">
     <a href="index.html" class="nav-logo">
       <img src="faviconV2.png" alt="Amnesty International" class="nav-logo-img">
-      <div class="nav-logo-text">Au Cinéma <span>Droits Humains</span></div>
+      <div class="nav-logo-text">Au Cinéma <span>Pour les Droits Humains</span></div>
     </a>
     <div class="nav-links">
       <a href="index.html"     class="nav-link">Accueil</a>
@@ -97,16 +106,13 @@
     <div class="container">
       <div class="footer-grid">
         <div class="footer-brand">
-          <div class="nav-logo" style="margin-bottom:1rem">
-            <img src="faviconV2.png" alt="Amnesty International" class="nav-logo-img" style="width:22px;height:22px">
-            <div class="nav-logo-text" style="font-size:0.78rem">Au Cinéma <span>Droits Humains</span></div>
-          </div>
+          <div class="nav-logo-text" style="font-size:0.85rem;margin-bottom:1rem;font-weight:700;text-transform:uppercase;letter-spacing:0.05em">Au Cinéma <span>Pour les Droits Humains</span></div>
           <p class="footer-desc">Festival annuel organisé par Amnesty International France.</p>
           <div class="footer-social">
-            <a href="#" class="footer-social-link" aria-label="Facebook">
+            <a href="https://www.facebook.com/acdhamnesty" class="footer-social-link" aria-label="Facebook" target="_blank" rel="noopener">
               <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path fill="currentColor" d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg>
             </a>
-            <a href="#" class="footer-social-link" aria-label="Instagram">
+            <a href="https://www.instagram.com/festivalacdh/" class="footer-social-link" aria-label="Instagram" target="_blank" rel="noopener">
               <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><rect x="2" y="2" width="20" height="20" rx="5" ry="5" fill="none" stroke="currentColor" stroke-width="2"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z" fill="none" stroke="currentColor" stroke-width="1.8"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"/></svg>
             </a>
           </div>
@@ -137,6 +143,7 @@
   </footer>
 
   <script src="js/data.js"></script>
+  <script src="js/admin-sync.js"></script>
   <script src="js/dom-helpers.js"></script>
   <script src="js/main.js"></script>
   <script src="js/film-detail.js"></script>

@@ -1,0 +1,626 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Admin — Festival Amnesty International</title>
+  <link rel="icon" href="faviconV2.png" type="image/png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Anton&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --yellow: #FFFF00;
+      --black:  #231F20;
+      --white:  #ffffff;
+      --gray:   #f4f4f4;
+      --gray2:  #e0e0e0;
+      --red:    #cc0000;
+      --green:  #008800;
+      --radius: 6px;
+    }
+    body { font-family: 'Inter', sans-serif; background: var(--gray); color: var(--black); min-height: 100vh; }
+
+    /* NAV */
+    .nav { background: var(--black); display: flex; align-items: center; justify-content: space-between; padding: 0 2rem; height: 60px; position: sticky; top: 0; z-index: 100; }
+    .nav-logo { display: flex; align-items: center; gap: .6rem; text-decoration: none; color: var(--white); font-family: 'Anton', sans-serif; font-size: 1rem; letter-spacing: .03em; }
+    .nav-logo img { height: 28px; }
+    .nav-logo span { color: var(--yellow); }
+    .nav-badge { background: var(--yellow); color: var(--black); font-family: 'Anton', sans-serif; font-size: .75rem; letter-spacing: .1em; padding: .2rem .6rem; border-radius: 3px; }
+
+    /* LAYOUT */
+    .admin-wrap { max-width: 1000px; margin: 0 auto; padding: 2rem 1.5rem; display: flex; flex-direction: column; gap: 1.5rem; }
+
+    /* CARDS */
+    .card { background: var(--white); border-radius: var(--radius); border: 1px solid var(--gray2); padding: 1.5rem; }
+    .card-title { font-family: 'Anton', sans-serif; font-size: 1.1rem; letter-spacing: .04em; margin-bottom: 1.2rem; display: flex; align-items: center; gap: .5rem; }
+    .card-title .dot { width: 8px; height: 8px; background: var(--yellow); border-radius: 50%; display: inline-block; }
+
+    /* FORM */
+    .form-body { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; }
+    @media (max-width: 680px) { .form-body { grid-template-columns: 1fr; } }
+    .form-col { display: flex; flex-direction: column; gap: .75rem; }
+    .form-section { border-top: 1px solid var(--gray2); padding-top: 1rem; margin-top: .25rem; }
+    .form-section:first-child { border-top: none; padding-top: 0; margin-top: 0; }
+    .form-section-label { font-size: .7rem; font-weight: 600; letter-spacing: .1em; text-transform: uppercase; color: #888; margin-bottom: .6rem; }
+    .form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: .6rem; }
+    .form-grid.cols3 { grid-template-columns: 1fr 1fr 1fr; }
+    .field { display: flex; flex-direction: column; gap: .3rem; }
+    .field > label { font-size: .78rem; font-weight: 600; color: #444; }
+    .field input, .field select, .field textarea {
+      border: 1.5px solid var(--gray2); border-radius: var(--radius);
+      padding: .5rem .7rem; font-family: 'Inter', sans-serif; font-size: .88rem;
+      background: var(--white); color: var(--black); transition: border-color .15s; width: 100%;
+    }
+    .field input:focus, .field select:focus, .field textarea:focus { outline: none; border-color: var(--black); }
+    .field textarea { resize: vertical; min-height: 120px; }
+
+    /* TAG INPUT */
+    .tag-input-wrap {
+      border: 1.5px solid var(--gray2); border-radius: var(--radius);
+      background: var(--white); padding: .35rem .5rem;
+      display: flex; flex-wrap: wrap; gap: .35rem; align-items: center;
+      cursor: text; transition: border-color .15s; min-height: 40px;
+    }
+    .tag-input-wrap:focus-within { border-color: var(--black); }
+    .tag-chip {
+      display: inline-flex; align-items: center; gap: .3rem;
+      background: var(--black); color: var(--white);
+      font-size: .78rem; font-weight: 500;
+      padding: .25rem .5rem .25rem .65rem; border-radius: 3px; white-space: nowrap;
+    }
+    .tag-chip button { background: none; border: none; color: rgba(255,255,255,.5); cursor: pointer; font-size: .85rem; line-height: 1; padding: 0 .1rem; transition: color .15s; }
+    .tag-chip button:hover { color: var(--white); }
+    .tag-input-inner { border: none; outline: none; font-family: 'Inter', sans-serif; font-size: .88rem; flex: 1; min-width: 120px; padding: .15rem 0; background: transparent; }
+
+    /* PILLS */
+    .pills-wrap { display: flex; flex-wrap: wrap; gap: .4rem; }
+    .pill { border: 1.5px solid var(--gray2); border-radius: 20px; padding: .3rem .75rem; font-size: .78rem; font-weight: 500; cursor: pointer; background: var(--white); color: #555; transition: all .15s; user-select: none; }
+    .pill:hover { border-color: #aaa; color: var(--black); }
+    .pill.active { background: var(--yellow); border-color: var(--black); color: var(--black); font-weight: 600; }
+
+    /* SÉANCES */
+    .seances-list { display: flex; flex-direction: column; gap: .75rem; }
+    .seance-item { background: var(--gray); border-radius: var(--radius); padding: .9rem; position: relative; }
+    .seance-num { font-size: .7rem; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; color: #888; margin-bottom: .6rem; }
+    .btn-remove-seance { position: absolute; top: .6rem; right: .6rem; background: none; border: none; cursor: pointer; color: #bbb; font-size: 1rem; line-height: 1; padding: .2rem .4rem; border-radius: 3px; transition: color .15s, background .15s; }
+    .btn-remove-seance:hover { color: var(--red); background: #ffeaea; }
+
+    /* BUTTONS */
+    .btn { display: inline-flex; align-items: center; gap: .4rem; border: none; border-radius: var(--radius); padding: .55rem 1rem; font-family: 'Inter', sans-serif; font-size: .85rem; font-weight: 600; cursor: pointer; transition: opacity .15s, transform .1s; }
+    .btn:active { transform: scale(.97); }
+    .btn-primary   { background: var(--yellow); color: var(--black); }
+    .btn-secondary { background: var(--black);  color: var(--white); }
+    .btn-ghost     { background: var(--gray);   color: var(--black); border: 1.5px solid var(--gray2); }
+    .btn-success   { background: #e8f5e8; color: var(--green); border: 1.5px solid #c0e0c0; }
+    .form-actions { display: flex; gap: .75rem; margin-top: 1.5rem; flex-wrap: wrap; grid-column: 1 / -1; }
+
+    /* FILMS TABLE */
+    .films-table-wrap { overflow-x: auto; }
+    table { width: 100%; border-collapse: collapse; font-size: .85rem; }
+    thead th { background: var(--black); color: var(--white); font-family: 'Anton', sans-serif; font-weight: 400; letter-spacing: .04em; padding: .65rem .9rem; text-align: left; white-space: nowrap; }
+    tbody tr { border-bottom: 1px solid var(--gray2); transition: background .12s; }
+    tbody tr:last-child { border-bottom: none; }
+    tbody tr:hover { background: #fafafa; }
+    tbody tr.editing { background: #fffde0; }
+    td { padding: .6rem .9rem; vertical-align: middle; }
+    td.td-title { font-weight: 600; max-width: 220px; }
+    td.td-title span { display: block; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+    td.td-meta { color: #666; white-space: nowrap; }
+    td.td-actions { white-space: nowrap; }
+    .btn-icon { background: none; border: 1px solid var(--gray2); border-radius: 4px; padding: .3rem .5rem; cursor: pointer; font-size: .8rem; transition: background .15s, border-color .15s; }
+    .btn-icon:hover { background: var(--gray); border-color: #bbb; }
+    .btn-icon.del:hover { background: #ffeaea; border-color: #ffc0c0; }
+    .table-empty { text-align: center; color: #aaa; padding: 2rem; font-size: .88rem; }
+
+
+    /* TOAST */
+    #toast { position: fixed; bottom: 1.5rem; right: 1.5rem; background: var(--black); color: var(--white); padding: .7rem 1.2rem; border-radius: var(--radius); font-size: .85rem; font-weight: 500; opacity: 0; transform: translateY(10px); transition: opacity .25s, transform .25s; pointer-events: none; z-index: 999; }
+    #toast.show { opacity: 1; transform: translateY(0); }
+    #toast.ok  { background: #1a5c1a; }
+    #toast.err { background: var(--red); }
+
+    #synopsis-counter.warn  { color: #e07000; font-weight: 600; }
+    #synopsis-counter.over  { color: var(--red); font-weight: 700; }
+    #f-synopsis.over        { border-color: var(--red); }
+
+    .page-header { padding: 1.5rem 2rem .5rem; display: flex; align-items: baseline; gap: 1rem; flex-wrap: wrap; }
+    .page-header h1 { font-family: 'Anton', sans-serif; font-size: 1.6rem; letter-spacing: .04em; }
+    .page-header p { color: #888; font-size: .85rem; }
+
+    .films-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 1rem; }
+    .films-count-badge { background: var(--gray); border: 1px solid var(--gray2); border-radius: 20px; font-size: .78rem; font-weight: 600; padding: .2rem .7rem; color: #555; }
+  </style>
+</head>
+<body>
+
+  <nav class="nav">
+    <a href="index.html" class="nav-logo">
+      <img src="faviconV2.png" alt="Amnesty International">
+      <div>Au Cinéma <span>Pour les Droits Humains</span></div>
+    </a>
+    <span class="nav-badge">ADMIN</span>
+  </nav>
+
+  <div class="page-header">
+    <h1>Gestion des films</h1>
+    <p>Les modifications sont appliquées automatiquement sur le site.</p>
+  </div>
+
+  <div class="admin-wrap">
+
+    <!-- FORMULAIRE -->
+    <div class="card" id="film-form-card">
+      <div class="card-title"><span class="dot"></span> <span id="form-mode-label">Nouveau film</span></div>
+
+      <div class="form-body">
+
+        <!-- Colonne gauche -->
+        <div class="form-col">
+
+          <div class="form-section">
+            <div class="form-section-label">Titre</div>
+            <div class="field">
+              <label for="f-title">Titre *</label>
+              <input type="text" id="f-title" placeholder="Titre du film" required>
+            </div>
+          </div>
+
+          <div class="form-section">
+            <div class="form-section-label">Réalisateur·ice(s)</div>
+            <div class="field">
+              <label>Noms * <span style="font-weight:400;color:#aaa;font-size:.75rem">Entrée ou virgule pour ajouter</span></label>
+              <div class="tag-input-wrap" id="directors-wrap">
+                <input type="text" class="tag-input-inner" id="director-input" placeholder="Nom Prénom">
+              </div>
+            </div>
+          </div>
+
+          <div class="form-section">
+            <div class="form-section-label">Origine &amp; dates</div>
+            <div class="form-grid">
+              <div class="field">
+                <label for="f-country">Pays *</label>
+                <input type="text" id="f-country" placeholder="France / Iran">
+              </div>
+              <div class="field">
+                <label for="f-year">Année *</label>
+                <input type="number" id="f-year" placeholder="2025" min="2000" max="2030">
+              </div>
+            </div>
+          </div>
+
+          <div class="form-section">
+            <div class="form-section-label">Format &amp; genre</div>
+            <div class="form-grid cols3">
+              <div class="field">
+                <label for="f-duration">Durée (min) *</label>
+                <input type="number" id="f-duration" placeholder="105" min="1">
+              </div>
+              <div class="field">
+                <label for="f-format">Format *</label>
+                <select id="f-format">
+                  <option value="long">Long métrage</option>
+                  <option value="court">Court métrage</option>
+                </select>
+              </div>
+              <div class="field">
+                <label for="f-genre">Genre *</label>
+                <select id="f-genre">
+                  <option value="documentaire">Documentaire</option>
+                  <option value="fiction">Fiction</option>
+                </select>
+              </div>
+            </div>
+          </div>
+
+          <div class="form-section">
+            <div class="form-section-label">Thématique(s) <span style="font-weight:400;text-transform:none;letter-spacing:0;color:#aaa;font-size:.75rem">plusieurs possibles</span></div>
+            <div class="pills-wrap" id="themes-pills"></div>
+          </div>
+
+        </div>
+
+        <!-- Colonne droite -->
+        <div class="form-col">
+
+          <div class="form-section">
+            <div class="form-section-label">Synopsis</div>
+            <div class="field">
+              <label for="f-synopsis" style="display:flex;justify-content:space-between;align-items:baseline">
+                <span>Synopsis *</span>
+                <span id="synopsis-counter" style="font-weight:400;font-size:.75rem;color:#aaa">1500</span>
+              </label>
+              <textarea id="f-synopsis" placeholder="Description du film..." rows="7" maxlength="1500"></textarea>
+            </div>
+          </div>
+
+          <div class="form-section">
+            <div class="form-section-label">Séances de diffusion</div>
+            <div class="seances-list" id="seances-list"></div>
+            <button class="btn btn-ghost" style="margin-top:.6rem;width:100%" id="btn-add-seance">+ Ajouter une séance</button>
+          </div>
+
+        </div>
+
+        <!-- Actions (pleine largeur) -->
+        <div class="form-actions">
+          <button class="btn btn-primary" id="btn-save">Enregistrer le film</button>
+          <button class="btn btn-ghost" id="btn-cancel">Annuler</button>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- LISTE DES FILMS -->
+    <div class="card">
+      <div class="films-header">
+        <div class="card-title" style="margin-bottom:0"><span class="dot"></span> Films enregistrés <span class="films-count-badge" id="films-count">0</span></div>
+      </div>
+      <div class="films-table-wrap" style="margin-top:1rem">
+        <table>
+          <thead>
+            <tr>
+              <th>Titre</th>
+              <th>Réalisateur·ice(s)</th>
+              <th>Année</th>
+              <th>Format</th>
+              <th>Genre</th>
+              <th>Séances</th>
+              <th></th>
+            </tr>
+          </thead>
+          <tbody id="films-tbody"></tbody>
+        </table>
+      </div>
+    </div>
+
+  </div>
+
+  <div id="toast"></div>
+
+  <script src="js/data.js"></script>
+  <script>
+  /* ── PROTECTION MOT DE PASSE ─────────────────────────────── */
+  (function() {
+    const KEY = 'admin_auth_v1';
+    const HASH = '9e2b3a1f'; // hash simple de "amnesty2027"
+    function simpleHash(s) {
+      let h = 0;
+      for (let i = 0; i < s.length; i++) h = (Math.imul(31, h) + s.charCodeAt(i)) | 0;
+      return (h >>> 0).toString(16).slice(0, 8);
+    }
+    if (sessionStorage.getItem(KEY) !== HASH) {
+      document.body.style.display = 'none';
+      const pwd = prompt('Mot de passe administrateur :');
+      if (!pwd || simpleHash(pwd) !== HASH) {
+        document.body.style.display = '';
+        document.body.textContent = 'Accès refusé.';
+        document.body.style.cssText = 'font-family:monospace;padding:4rem;text-align:center;background:#0E0C0C;color:#cc0000;font-size:1.2rem;';
+        return;
+      }
+      sessionStorage.setItem(KEY, HASH);
+      document.body.style.display = '';
+    }
+  })();
+
+  /* ── CONSTANTES ─────────────────────────────────────────── */
+  const THEMES = [
+    { val: 'migration',     label: 'Migration' },
+    { val: 'justice',       label: 'Justice' },
+    { val: 'genre',         label: 'Droits des femmes' },
+    { val: 'enfance',       label: 'Enfance & jeunesse' },
+    { val: 'environnement', label: 'Environnement' },
+    { val: 'libertes',      label: 'Libertés fondamentales' },
+    { val: 'conflits',      label: 'Conflits & guerre' },
+    { val: 'racisme',       label: 'Racisme & discriminations' },
+    { val: 'autre',         label: 'Autre' },
+  ];
+  const cityNames = CITIES.map(c => c.name);
+
+  /* ── STATE ──────────────────────────────────────────────── */
+  const LS_KEY  = 'admin_films';
+  let films     = loadFilms();
+  let editId    = null;
+  let directors = [];
+  let selThemes = new Set();
+
+  function loadFilms() {
+    try {
+      const s = localStorage.getItem(LS_KEY);
+      if (s) return JSON.parse(s);
+    } catch(e) {}
+    return JSON.parse(JSON.stringify(FILMS));
+  }
+  function saveFilms() { localStorage.setItem(LS_KEY, JSON.stringify(films)); }
+
+  /* ── DOM helpers ────────────────────────────────────────── */
+  function domEl(tag, attrs, ...children) {
+    const node = document.createElement(tag);
+    for (const [k, v] of Object.entries(attrs || {})) {
+      if (k === 'class')           node.className = v;
+      else if (k === 'style')      node.style.cssText = v;
+      else if (k.startsWith('on')) node.addEventListener(k.slice(2), v);
+      else                         node.setAttribute(k, v);
+    }
+    for (const child of children) {
+      if (typeof child === 'string') node.appendChild(document.createTextNode(child));
+      else if (child) node.appendChild(child);
+    }
+    return node;
+  }
+
+  function makeSelect(cls, options, selectedVal) {
+    const sel = document.createElement('select');
+    sel.className = cls;
+    options.forEach(([val, label]) => {
+      const opt = document.createElement('option');
+      opt.value = val; opt.textContent = label;
+      if (val === selectedVal) opt.selected = true;
+      sel.appendChild(opt);
+    });
+    return sel;
+  }
+
+  /* ── TAG INPUT ──────────────────────────────────────────── */
+  function renderDirectorTags() {
+    const wrap  = document.getElementById('directors-wrap');
+    const input = document.getElementById('director-input');
+    wrap.querySelectorAll('.tag-chip').forEach(c => c.remove());
+    directors.forEach((name, i) => {
+      const chip = domEl('div', { class: 'tag-chip' });
+      chip.appendChild(document.createTextNode(name));
+      const rm = domEl('button', { type: 'button', title: 'Retirer',
+        onclick: () => { directors.splice(i, 1); renderDirectorTags(); }
+      }, '×');
+      chip.appendChild(rm);
+      wrap.insertBefore(chip, input);
+    });
+  }
+
+  function commitDirectorInput() {
+    const input = document.getElementById('director-input');
+    const val = input.value.replace(/,+$/, '').trim();
+    if (val && !directors.includes(val)) { directors.push(val); renderDirectorTags(); }
+    input.value = '';
+  }
+
+  document.getElementById('director-input').addEventListener('keydown', e => {
+    if (e.key === 'Enter' || e.key === ',') { e.preventDefault(); commitDirectorInput(); }
+    if (e.key === 'Backspace' && e.target.value === '' && directors.length) { directors.pop(); renderDirectorTags(); }
+  });
+  document.getElementById('director-input').addEventListener('blur', commitDirectorInput);
+  document.getElementById('directors-wrap').addEventListener('click', () => document.getElementById('director-input').focus());
+
+  /* ── PILLS ──────────────────────────────────────────────── */
+  function renderThemePills() {
+    const wrap = document.getElementById('themes-pills');
+    wrap.textContent = '';
+    THEMES.forEach(({ val, label }) => {
+      const pill = domEl('div', { class: 'pill' + (selThemes.has(val) ? ' active' : ''),
+        onclick: () => { selThemes.has(val) ? selThemes.delete(val) : selThemes.add(val); pill.classList.toggle('active', selThemes.has(val)); }
+      }, label);
+      wrap.appendChild(pill);
+    });
+  }
+
+  /* ── SÉANCES ────────────────────────────────────────────── */
+  function addSeance(data = {}) {
+    const list = document.getElementById('seances-list');
+    const wrap = domEl('div', { class: 'seance-item' });
+    wrap.appendChild(domEl('div', { class: 'seance-num' }));
+    wrap.appendChild(domEl('button', { class: 'btn-remove-seance', type: 'button', title: 'Supprimer',
+      onclick: () => { wrap.remove(); renumberSeances(); }
+    }, '✕'));
+
+    const r1 = domEl('div', { class: 'form-grid' });
+    const dateInput = domEl('input', { type: 'date', class: 's-date', min: '2027-01-01', max: '2027-12-31', value: data.date || '' });
+    const timeInput = domEl('input', { type: 'time', class: 's-time', value: data.time || '' });
+    r1.appendChild(domEl('div', { class: 'field' }, domEl('label', {}, 'Date *'), dateInput));
+    r1.appendChild(domEl('div', { class: 'field' }, domEl('label', {}, 'Heure *'), timeInput));
+    wrap.appendChild(r1);
+
+    const r2 = domEl('div', { class: 'form-grid', style: 'margin-top:.5rem' });
+    const citySelect = makeSelect('s-city', cityNames.map(c => [c, c]), data.city || cityNames[0]);
+    const typeSelect = makeSelect('s-type', [['cinema','Cinéma'],['association','Association'],['ecole','École']], data.venueType || 'cinema');
+    r2.appendChild(domEl('div', { class: 'field' }, domEl('label', {}, 'Ville *'), citySelect));
+    r2.appendChild(domEl('div', { class: 'field' }, domEl('label', {}, 'Type de lieu *'), typeSelect));
+    wrap.appendChild(r2);
+
+    const venueInput = domEl('input', { type: 'text', class: 's-venue', placeholder: 'Cinéma Le Prado', value: data.venue || '' });
+    wrap.appendChild(domEl('div', { class: 'field', style: 'margin-top:.5rem' }, domEl('label', {}, 'Nom du lieu *'), venueInput));
+
+    list.appendChild(wrap);
+    renumberSeances();
+  }
+
+  function renumberSeances() {
+    document.querySelectorAll('.seance-item .seance-num').forEach((el, i) => { el.textContent = `Séance ${i + 1}`; });
+  }
+
+  function getSeances() {
+    return [...document.querySelectorAll('.seance-item')].map(item => ({
+      date:      item.querySelector('.s-date').value,
+      time:      item.querySelector('.s-time').value,
+      city:      item.querySelector('.s-city').value,
+      venueType: item.querySelector('.s-type').value,
+      venue:     item.querySelector('.s-venue').value.trim(),
+    }));
+  }
+
+  /* ── SAVE ───────────────────────────────────────────────── */
+  function saveFilm() {
+    commitDirectorInput();
+    const title    = document.getElementById('f-title').value.trim();
+    const country  = document.getElementById('f-country').value.trim();
+    const year     = parseInt(document.getElementById('f-year').value);
+    const duration = parseInt(document.getElementById('f-duration').value);
+    const format   = document.getElementById('f-format').value;
+    const genre    = document.getElementById('f-genre').value;
+    const synopsis = document.getElementById('f-synopsis').value.trim();
+    const theme    = [...selThemes];
+    const screenings = getSeances();
+
+    if (!title || !country || !year || !duration || !synopsis) return toast('Remplis tous les champs obligatoires (*)', 'err');
+    if (!directors.length)  return toast('Ajoute au moins un réalisateur', 'err');
+    if (!theme.length)      return toast('Sélectionne au moins une thématique', 'err');
+    if (!screenings.length) return toast('Ajoute au moins une séance', 'err');
+    if (screenings.some(s => !s.date || !s.time || !s.venue)) return toast('Vérifie toutes les séances (date, heure, lieu)', 'err');
+
+    const filmData = { title, director: [...directors], year, country, duration, format, genre, theme, synopsis, screenings };
+
+    if (editId !== null) {
+      const idx = films.findIndex(f => f.id === editId);
+      films[idx] = { id: editId, ...filmData };
+      toast('Film mis à jour ✓', 'ok');
+    } else {
+      const newId = films.length ? Math.max(...films.map(f => f.id)) + 1 : 1;
+      films.push({ id: newId, ...filmData });
+      toast('Film ajouté ✓', 'ok');
+    }
+    saveFilms(); renderTable(); resetForm();
+  }
+
+  /* ── EDIT / DELETE ──────────────────────────────────────── */
+  function editFilm(id) {
+    const f = films.find(f => f.id === id);
+    if (!f) return;
+    editId = id;
+    document.getElementById('form-mode-label').textContent = `Modifier — ${f.title}`;
+    document.getElementById('f-title').value    = f.title;
+    document.getElementById('f-country').value  = f.country;
+    document.getElementById('f-year').value     = f.year;
+    document.getElementById('f-duration').value = f.duration;
+    document.getElementById('f-format').value   = f.format;
+    document.getElementById('f-genre').value    = f.genre;
+    document.getElementById('f-synopsis').value = f.synopsis;
+    updateSynopsisCounter();
+
+    directors = Array.isArray(f.director) ? [...f.director] : (f.director ? [f.director] : []);
+    document.getElementById('director-input').value = '';
+    renderDirectorTags();
+
+    selThemes = new Set(Array.isArray(f.theme) ? f.theme : (f.theme ? [f.theme] : []));
+    renderThemePills();
+
+    document.getElementById('seances-list').textContent = '';
+    f.screenings.forEach(s => addSeance(s));
+
+    document.getElementById('film-form-card').scrollIntoView({ behavior: 'smooth' });
+    renderTable();
+  }
+
+  function deleteFilm(id) {
+    if (!confirm('Supprimer ce film ?')) return;
+    films = films.filter(f => f.id !== id);
+    saveFilms();
+    if (editId === id) resetForm();
+    else renderTable();
+    toast('Film supprimé', 'ok');
+  }
+
+  /* ── RESET ──────────────────────────────────────────────── */
+  function resetForm() {
+    editId = null; directors = []; selThemes = new Set();
+    document.getElementById('form-mode-label').textContent = 'Nouveau film';
+    ['f-title','f-country','f-year','f-duration','f-synopsis'].forEach(id => { document.getElementById(id).value = ''; });
+    document.getElementById('f-format').value = 'long';
+    document.getElementById('f-genre').value  = 'documentaire';
+    document.getElementById('director-input').value = '';
+    renderDirectorTags(); renderThemePills();
+    updateSynopsisCounter();
+    document.getElementById('seances-list').textContent = '';
+    renderTable();
+  }
+
+  /* ── RENDER TABLE ───────────────────────────────────────── */
+  function fmtDuration(min) {
+    if (!min) return '';
+    const h = Math.floor(min / 60), m = min % 60;
+    return m ? `${h}h${String(m).padStart(2,'0')}` : `${h}h`;
+  }
+
+  function renderTable() {
+    const tbody = document.getElementById('films-tbody');
+    const count = document.getElementById('films-count');
+    count.textContent = films.length;
+    tbody.textContent = '';
+
+    if (!films.length) {
+      const tr = document.createElement('tr');
+      const td = domEl('td', { class: 'table-empty', colspan: '7' }, 'Aucun film enregistré.');
+      tr.appendChild(td); tbody.appendChild(tr); return;
+    }
+
+    films.forEach(f => {
+      const dirStr   = Array.isArray(f.director) ? f.director.join(' / ') : (f.director || '—');
+      const fmtLabel = f.format === 'long' ? 'Long métrage' : 'Court métrage';
+      const genLabel = f.genre === 'documentaire' ? 'Documentaire' : 'Fiction';
+
+      const tr = domEl('tr', { class: editId === f.id ? 'editing' : '' });
+
+      const tdTitle = domEl('td', { class: 'td-title' });
+      const titleSpan = document.createElement('span');
+      titleSpan.textContent = f.title;
+      tdTitle.appendChild(titleSpan);
+
+      const tdDir = domEl('td', { class: 'td-meta' });
+      tdDir.textContent = dirStr;
+
+      const tdYear = domEl('td', { class: 'td-meta' });
+      tdYear.textContent = f.year;
+
+      const tdFmt = domEl('td', { class: 'td-meta' });
+      tdFmt.textContent = fmtLabel;
+
+      const tdGen = domEl('td', { class: 'td-meta' });
+      tdGen.textContent = genLabel;
+
+      const tdSeances = domEl('td', { class: 'td-meta' });
+      tdSeances.textContent = f.screenings.length;
+
+      const tdAct = domEl('td', { class: 'td-actions' });
+      tdAct.appendChild(domEl('button', { class: 'btn-icon', type: 'button', title: 'Modifier',  onclick: () => editFilm(f.id) }, '✏️'));
+      tdAct.appendChild(document.createTextNode(' '));
+      tdAct.appendChild(domEl('button', { class: 'btn-icon del', type: 'button', title: 'Supprimer', onclick: () => deleteFilm(f.id) }, '🗑️'));
+
+      tr.appendChild(tdTitle); tr.appendChild(tdDir); tr.appendChild(tdYear);
+      tr.appendChild(tdFmt);   tr.appendChild(tdGen); tr.appendChild(tdSeances); tr.appendChild(tdAct);
+      tbody.appendChild(tr);
+    });
+  }
+
+
+  /* ── TOAST ──────────────────────────────────────────────── */
+  let toastTimer;
+  function toast(msg, type = '') {
+    const t = document.getElementById('toast');
+    t.textContent = msg;
+    t.className = 'show' + (type ? ' ' + type : '');
+    clearTimeout(toastTimer);
+    toastTimer = setTimeout(() => { t.className = ''; }, 2800);
+  }
+
+  /* ── SYNOPSIS COUNTER ──────────────────────────────────── */
+  const MAX_SYNOPSIS = 1500;
+  function updateSynopsisCounter() {
+    const ta      = document.getElementById('f-synopsis');
+    const counter = document.getElementById('synopsis-counter');
+    const left    = MAX_SYNOPSIS - ta.value.length;
+    counter.textContent = left + ' car. restants';
+    counter.className = left < 0 ? 'over' : left < 150 ? 'warn' : '';
+    ta.classList.toggle('over', left < 0);
+  }
+  document.getElementById('f-synopsis').addEventListener('input', updateSynopsisCounter);
+
+  /* ── INIT ───────────────────────────────────────────────── */
+  document.getElementById('btn-add-seance').addEventListener('click', () => addSeance());
+  document.getElementById('btn-save').addEventListener('click', saveFilm);
+  document.getElementById('btn-cancel').addEventListener('click', resetForm);
+
+  renderThemePills();
+  renderTable();
+  </script>
+</body>
+</html>

@@ -4,8 +4,16 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Carte des villes — Au Cinéma Pour les Droits Humains</title>
-  <meta name="description" content="Trouvez les diffusions du festival dans votre ville — carte interactive du sud de la France.">
+  <meta name="description" content="Trouvez les diffusions du festival dans votre ville — carte interactive des 20 villes partenaires dans le sud de la France.">
   <link rel="icon" href="faviconV2.png" type="image/png">
+  <!-- Open Graph -->
+  <meta property="og:type"        content="website">
+  <meta property="og:title"       content="Carte des villes — Au Cinéma Pour les Droits Humains 2027">
+  <meta property="og:description" content="20 villes partenaires dans le sud de la France. Retrouvez le festival près de chez vous.">
+  <meta property="og:image"       content="https://lucjoss.github.io/festival-droits-humains/og-cover.png">
+  <meta property="og:url"         content="https://lucjoss.github.io/festival-droits-humains/carte.html">
+  <meta property="og:locale"      content="fr_FR">
+  <meta name="twitter:card"       content="summary_large_image">
   <link rel="stylesheet" href="css/style.css">
   <!-- Leaflet -->
   <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
@@ -18,10 +26,10 @@
 <body>
 
   <!-- ── NAVIGATION ─────────────────────────────────────── -->
-  <nav class="nav scrolled">
+  <nav class="nav">
     <a href="index.html" class="nav-logo">
       <img src="faviconV2.png" alt="Amnesty International" class="nav-logo-img">
-      <div class="nav-logo-text">Au Cinéma <span>Droits Humains</span></div>
+      <div class="nav-logo-text">Au Cinéma <span>Pour les Droits Humains</span></div>
     </a>
     <div class="nav-links">
       <a href="index.html"     class="nav-link">Accueil</a>
@@ -93,6 +101,7 @@
 
   <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
   <script src="js/data.js"></script>
+  <script src="js/admin-sync.js"></script>
   <script src="js/dom-helpers.js"></script>
   <script src="js/main.js"></script>
   <script src="js/carte.js"></script>
